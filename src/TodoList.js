@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 
 function TodoList() {
-    const [tasks, setTasks] = useState([]);
-    const [todo, setTodo] = useState('')
+    const [todo, setTodo] = useState('') //strings
+    const [tasks, setTasks] = useState([]); //arrays
+    const [errors, setErrors] = useState('');
 
     const handleInput = (e) => {
-        setTodo(e.target.value);
+        setTodo(e.target.value); 
         console.log(tasks)
     };
 
     const addTask = (e) => {
         e.preventDefault();
+        if (todo.trim() === ''){
+            setErrors('Please enter a todo');
+            return
+        }
         setTasks([...tasks, todo]);
         setTodo('');
     };
@@ -26,12 +31,13 @@ function TodoList() {
             <form onSubmit={addTask}>
                 <input type="text" value={todo} placeholder="enter a todo" onChange={handleInput} />
                 <button type="submit">Add</button>
+                {errors && <p className="error-message">{errors}</p>}
             </form>
             {tasks.map((item, index) => (
                 <ul>
                     <li key={index}>
                         {item}
-                        <button onClick={() => deleteTask(index)}>Delete</button>
+                        <button className='delete-btn' onClick={() => deleteTask(index)}>Delete</button>
                     </li>
                 </ul>
             ))}
