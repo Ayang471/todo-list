@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 function TodoList() {
     const [todo, setTodo] = useState('') //strings
     const [tasks, setTasks] = useState([]); //arrays
-    const [errors, setErrors] = useState('');
+    const [errors, setErrors] = useState(''); //error messages
 
     const handleInput = (e) => {
         setTodo(e.target.value); 
